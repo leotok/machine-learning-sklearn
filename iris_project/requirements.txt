@@ -1,0 +1,16 @@
+pandas==0.19.0
+sklearn==0.0
+matplotlib==1.5.3
+
+# MacOS
+# confirmar versao scipy
+numpy==1.12.1
+scipy
+
+# Windows:
+# downloaded scipy from http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy
+# pip install scipy-0.18.1-cp27-cp27m-win_amd64.whl
+
+# downloaded numpy from  http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy
+# pip install numpy-1.11.2+mkl-cp27-cp27m-win_amd64.whl
+
