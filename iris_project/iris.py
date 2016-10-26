@@ -28,53 +28,57 @@ names = [
 dataset = pandas.read_csv(url, names=names)
 
 # shape
-print dataset.shape
+# print dataset.shape
 
-# head
-print dataset.head(20)
+# # head
+# print dataset.head(20)
 
-# descriptions
-print dataset.describe()
+# # descriptions
+# print dataset.describe()
 
-# class distribution
-print dataset.groupby('class').size()
+# # class distribution
+# print dataset.groupby('class').size()
 
-########## Data Visualization ###########
+# ########## Data Visualization ###########
 
-# box and whisker plots
-dataset.plot(
-    kind='box', subplots=True,
-    layout=(2,2), sharex=False,
-    sharey=False
-    )
-plt.show()
+# # box and whisker plots
+# dataset.plot(
+#     kind='box', subplots=True,
+#     layout=(2,2), sharex=False,
+#     sharey=False
+#     )
+# plt.show()
 
-# histograms
-dataset.hist()
-plt.show()
+# # histograms
+# dataset.hist()
+# plt.show()
 
-# scatter plot matrix
-scatter_matrix(dataset)
-plt.show()
+# # scatter plot matrix
+# scatter_matrix(dataset)
+# plt.show()
 
 ######### Validation Dataset ##########
 
 # split-out Validation dataset
 array = dataset.values
+# assign all rows from data columns to X
 X = array[:,0:4]
+# assign all rows from class column to Y
 Y = array[:,4]
 validation_size = 0.20
 seed = 7
+# separate data into test and validation arrays
 X_train, X_validation, Y_train, Y_validation = cross_validation.train_test_split(
     X, Y, test_size=validation_size, random_state=seed
 )
+
+print "X_train", len(X_train), "X_validation", len(X_validation), "Y_train", len(Y_train), "Y_validation", len(Y_validation)
 
 ###### Test Harness ######
 
 # test options and evaluation metrics
 num_folds = 10
 num_instances = len(X_train)
-seed = 7
 scoring = 'accuracy'
 
 # Spot Check Algorithims
@@ -99,9 +103,9 @@ for name, model in models:
     print msg
 
 # Compare Algorithims
-fig = plt.figure()
-fig.suptitle('Algorithims Comparison')
-ax = fig.add_subplot(111)
-plt.boxplot(results)
-ax.set_xticklabels(names)
-plt.show()
+# fig = plt.figure()
+# fig.suptitle('Algorithims Comparison')
+# ax = fig.add_subplot(111)
+# plt.boxplot(results)
+# ax.set_xticklabels(names)
+# plt.show()
