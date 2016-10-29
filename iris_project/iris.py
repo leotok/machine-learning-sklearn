@@ -1,6 +1,7 @@
 # Machine Learning tutorial
 # http://machinelearningmastery.com/machine-learning-in-python-step-by-step/
 
+import pickle
 import pandas
 import matplotlib.pyplot as plt
 from pandas.tools.plotting import scatter_matrix
@@ -28,33 +29,33 @@ names = [
 dataset = pandas.read_csv(url, names=names)
 
 # shape
-# print dataset.shape
+print dataset.shape
 
-# # head
-# print dataset.head(20)
+# head
+print dataset.head(20)
 
-# # descriptions
-# print dataset.describe()
+# descriptions
+print dataset.describe()
 
-# # class distribution
-# print dataset.groupby('class').size()
+# class distribution
+print dataset.groupby('class').size()
 
-# ########## Data Visualization ###########
+########## Data Visualization ###########
 
-# # box and whisker plots
-# dataset.plot(
-#     kind='box', subplots=True,
-#     layout=(2,2), sharex=False,
-#     sharey=False
-#     )
+# box and whisker plots
+dataset.plot(
+    kind='box', subplots=True,
+    layout=(2,2), sharex=False,
+    sharey=False
+    )
 # plt.show()
 
-# # histograms
-# dataset.hist()
+# histograms
+dataset.hist()
 # plt.show()
 
-# # scatter plot matrix
-# scatter_matrix(dataset)
+# scatter plot matrix
+scatter_matrix(dataset)
 # plt.show()
 
 ######### Validation Dataset ##########
@@ -103,9 +104,27 @@ for name, model in models:
     print msg
 
 # Compare Algorithims
-# fig = plt.figure()
-# fig.suptitle('Algorithims Comparison')
-# ax = fig.add_subplot(111)
-# plt.boxplot(results)
-# ax.set_xticklabels(names)
+fig = plt.figure()
+fig.suptitle('Algorithims Comparison')
+ax = fig.add_subplot(111)
+plt.boxplot(results)
+ax.set_xticklabels(names)
 # plt.show()
+
+# Make predictions on validation dataset
+knn = KNeighborsClassifier()
+knn.fit(X_train, Y_train)
+predictions = knn.predict(X_validation)
+print(accuracy_score(Y_validation, predictions))
+print(confusion_matrix(Y_validation, predictions))
+print(classification_report(Y_validation, predictions))
+
+# save model to disk
+filename = "finalized_model.sav"
+pickle.dump(model, open(filename, 'wb'))
+
+ # load model from disk
+loaded_model = pickle.load(open(filename, 'rb'))
+loaded_model.fit(X_validation, Y_validation)
+print loaded_model.score(X_validation, Y_validation)
+print loaded_model.predict(X_validation)

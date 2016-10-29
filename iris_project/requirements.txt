@@ -5,7 +5,7 @@ matplotlib==1.5.3
 # MacOS
 # confirmar versao scipy
 numpy==1.12.1
-scipy
+scipy==0.18.1
 
 # Windows:
 # downloaded scipy from http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy
